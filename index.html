@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verona Roleplay 🇮🇹</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0b0613 0%, #120a1f 45%, #09050f 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 25px;
+      background: rgba(10, 10, 10, 0.70);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(138, 43, 226, 0.30);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #d2a8ff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #c084fc;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+      background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.75)),
+        radial-gradient(circle at top, rgba(138, 43, 226, 0.25), transparent 40%),
+        url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1600&auto=format&fit=crop') center/cover;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeUp 1s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(138, 43, 226, 0.18);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      border-radius: 999px;
+      color: #e5ccff;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      margin-bottom: 18px;
+      text-shadow: 0 0 25px rgba(138, 43, 226, 0.45);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #ece3f8;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8A2BE2, #b14dff);
+      color: white;
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 30px rgba(138, 43, 226, 0.55);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #e9d5ff;
+    }
+
+    .section-text {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: #d7c8ea;
+      line-height: 1.7;
+    }
+
+    .cards {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(138, 43, 226, 0.18);
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192, 132, 252, 0.5);
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.18);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #f1e7ff;
+    }
+
+    .card p {
+      color: #d7c8ea;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .status-box {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(138, 43, 226, 0.20);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.20);
+    }
+
+    .status-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #f1e7ff;
+    }
+
+    .status {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #8effa0;
+    }
+
+    .info {
+      color: #d7c8ea;
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+
+    .discord {
+      text-align: center;
+      padding-bottom: 100px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: rgba(0,0,0,0.35);
+      border-top: 1px solid rgba(138, 43, 226, 0.20);
+      color: #cbb7e6;
+      font-size: 0.95rem;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .hero {
+        padding-top: 150px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">🏙️ Verona Roleplay 🇮🇹</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#chi-siamo">Chi siamo</a>
+      <a href="#lavori">Lavori</a>
+      <a href="#status">Status</a>
+      <a href="#discord">Discord</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="badge">Server Roleplay Italiano • Roblox</div>
+      <h1>Verona Roleplay 🇮🇹</h1>
+      <p>
+        Vivi un'esperienza roleplay realistica, entra in una community seria
+        e scegli il tuo percorso tra polizia, ambulanza, pompieri e tanti altri lavori.
+      </p>
+      <div class="buttons">
+      <a href="https://www.roblox.com/share?code=243287106d5c234a8476fe9e631c8863&type=ExperienceDetails&stamp=1776209688224" class="btn btn-primary">🎮 Gioca ora</a>
+      <a href="https://discord.gg/UwSHyrR33y" class="btn btn-primary">🔗 Unisciti al Discord</a>   
+      </div>
+    </div>
+  </section>
+
+  <section id="chi-siamo">
+    <h2 class="section-title">🌍 Chi siamo</h2>
+    <p class="section-text">
+      Verona Roleplay 🇮🇹 è un server roleplay italiano moderno e coinvolgente,
+      pensato per chi vuole divertirsi in un ambiente serio, organizzato e pieno di possibilità.
+      Costruisci la tua storia, rispetta il roleplay e vivi Verona come mai prima d’ora.
+    </p>
+  </section>
+
+  <section id="lavori">
+    <h2 class="section-title">💼 Lavori disponibili</h2>
+    <p class="section-text">
+      Scegli il tuo mestiere e costruisci il tuo futuro nel server.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <h3>🚓 Polizia</h3>
+        <p>Proteggi la città, fai rispettare la legge e mantieni l’ordine pubblico.</p>
+      </div>
+      <div class="card">
+        <h3>🚑 Ambulanza</h3>
+        <p>Intervieni nelle emergenze e salva i cittadini nei momenti più difficili.</p>
+      </div>
+      <div class="card">
+        <h3>🚒 Pompieri</h3>
+        <p>Spegni incendi, soccorri persone e affronta situazioni ad alto rischio.</p>
+      </div>
+      <div class="card">
+        <h3>🚛 Carroattrezzi</h3>
+        <p>Aiuta i veicoli in difficoltà e supporta la viabilità della città.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="status">
+    <h2 class="section-title">📡 Stato server</h2>
+    <div class="status-box">
+      <h3>Verona RP Status</h3>
+      <div class="status" id="serverStatus">🟢 Online</div>
+      <div class="info">👥 Giocatori: 45</div>
+      <div class="info">🌐 IP/Link: veronaroleplay.it</div>
+      <div class="info">🎮 Gioco: Roblox Roleplay</div>
+      <div class="info">🇮🇹 Modalità: RP realistico italiano</div>
+    </div>
+  </section>
+
+  <section class="discord" id="discord">
+    <h2 class="section-title">💬 Entra nella community</h2>
+    <p class="section-text">
+      Unisciti al nostro Discord per supporto, novità, ticket e aggiornamenti sul server.
+    </p>
+    <a href="#" class="btn btn-primary">🎮 Gioca ora</a>
+    <a href="#" class="btn btn-primary">🔗 Unisciti al Discord</a>
+  </section>
+
+  <footer>
+    © 2026 Verona Roleplay 🇮🇹 - Tutti i diritti riservati
+  </footer>
+
+  <script>
+    const stati = [
+      "🟢 Online",
+      "🟠 Manutenzione",
+      "🟡 Riavvio",
+      "🔵 Sviluppo",
+      "🔴 Offline"
+    ];
+
+    let i = 0;
+    const serverStatus = document.getElementById("serverStatus");
+
+    setInterval(() => {
+      i = (i + 1) % stati.length;
+      serverStatus.textContent = stati[i];
+    }, 4000);
+  </script>
+
+</body>
+</html>
